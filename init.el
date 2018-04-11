@@ -67,6 +67,9 @@
 ;; nomasp 当前行高亮显示
 (global-hl-line-mode t)
 
+;; nomasp 加载主题monokai
+(load-theme 'monokai t)
+
 ;; nomasp 关闭启动帮助画面
 (setq inhibit-splash-screen t)
 
