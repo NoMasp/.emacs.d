@@ -12,3 +12,10 @@
 
 # nomasp 排除recent文件
 recentf
+.recentf
+.recentf~
+
+.DS_Store
+
+elpa/
+auto-save-list/
