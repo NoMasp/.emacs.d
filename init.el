@@ -13,6 +13,9 @@
 ;; nomasp 显示行号
 (global-linum-mode t)
 
+;; nomasp 当前行高亮显示
+(global-hl-line-mode t)
+
 ;; nomasp 关闭启动帮助画面
 (setq inhibit-splash-screen t)
 
@@ -49,6 +52,9 @@
 
 ;; nomasp 让emacs开启时为全屏
 ;; (setq initial-frame-alist (quote ((fullscreen . maximized))))
+
+;; nomasp 添加一个钩子，激活paren-mode
+(add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
