@@ -10,7 +10,7 @@
   (require 'package)
   (package-initialize)
   (setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
-			   ("melpa" . "http://elpa.emacs-china.org/melpa/"))))
+			   ("melpa" . "http://elpa.emacs-china.org/melpa-stable/"))))
 
 ;; 注意 elpa.emacs-china.org 是 Emacs China 中文社区在国内搭建的一个 ELPA 镜像
 
@@ -27,7 +27,7 @@
 		      counsel
 		      smartparens
 		      ;; --- Major Mode ---
-		      js2-mode
+		      js2-mode ;; javascript
 		      ;; --- Minor Mode ---
 		      nodejs-repl
 		      exec-path-from-shell
@@ -70,6 +70,47 @@
 ;; nomasp 加载主题monokai
 (load-theme 'monokai t)
 
+;; nomasp 加载hungry-delete，能够一次删除光标左侧所有空格
+(require 'hungry-delete)
+(global-hungry-delete-mode)
+
+;; nomasp 智能添加右括号
+(require 'smartparens-config)
+;;(add-hook 'emacs-lisp-mode-hook 'smartparens-mode)
+(smartparens-global-mode t)
+
+;; nomasp 让mac系统下面的命令程序可见
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
+
+;; nomasp js2-mode
+(setq auto-mode-alist
+      (append
+       '(("\\.js\\'" . js2-mode))
+       auto-mode-alist))
+
+;; nomasp swiper将搜索结果多行列出
+(ivy-mode 1)
+(setq ivy-use-virtual-buffers t)
+(setq enable-recursive-minibuffers t)
+(global-set-key "\C-s" 'swiper)
+(global-set-key (kbd "C-c C-r") 'ivy-resume)
+(global-set-key (kbd "<f6>") 'ivy-resume)
+(global-set-key (kbd "M-x") 'counsel-M-x)
+(global-set-key (kbd "C-x C-f") 'counsel-find-file)
+(global-set-key (kbd "<f1> f") 'counsel-describe-function)
+(global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+(global-set-key (kbd "<f1> l") 'counsel-find-library)
+(global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+(global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+(global-set-key (kbd "C-c g") 'counsel-git)
+(global-set-key (kbd "C-c j") 'counsel-git-grep)
+(global-set-key (kbd "C-c k") 'counsel-ag)
+(global-set-key (kbd "C-x l") 'counsel-locate)
+(global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
+(define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
+
+
 ;; nomasp 关闭启动帮助画面
 (setq inhibit-splash-screen t)
 
@@ -78,6 +119,11 @@
 
 ;; nomasp 修改显示字体大小 16pt
 (set-face-attribute 'default nil :height 130)
+
+;; nomasp 设定一些快捷键
+(global-set-key (kbd "C-h C-f") 'find-function)
+(global-set-key (kbd "C-h C-v") 'find-variable)
+(global-set-key (kbd "C-h C-k") 'find-function-on-key)
 
 ;; nomasp 快速打开配置文件，绑定到F2
 (defun open-my-init-file()
