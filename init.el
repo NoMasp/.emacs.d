@@ -2,58 +2,14 @@
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
-;; nomasp delete
-;; (package-initialize)
+(package-initialize)
 
-;; nomasp start
-(when (>= emacs-major-version 24)
-  (require 'package)
-  (package-initialize)
-  (setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
-			   ("melpa" . "http://elpa.emacs-china.org/melpa-stable/"))))
+(add-to-list 'load-path "~/.emacs.d/config")
 
-;; 注意 elpa.emacs-china.org 是 Emacs China 中文社区在国内搭建的一个 ELPA 镜像
+(require 'init-packages)
 
-;; cl - Common Lisp Extension
-(require 'cl)
-
-;; Add Packages
-(defvar my/packages '(
-		      ;; --- Auto-completion ---
-		      company
-		      ;; --- Better Editor ---
-		      hungry-delete
-		      swiper
-		      counsel
-		      smartparens
-		      ;; --- Major Mode ---
-		      js2-mode ;; javascript
-		      ;; --- Minor Mode ---
-		      nodejs-repl
-		      exec-path-from-shell
-		      ;; --- Themes ---
-		      monokai-theme
-		      ;; solarized-theme
-		      ) "Default packages")
-
-(setq package-selected-packages my/packages)
-
-(defun my/packages-installed-p ()
-  (loop for pkg in my/packages
-	when (not (package-installed-p pkg)) do (return nil)
-	finally (return t)))
-
-(unless (my/packages-installed-p)
-  (message "%s" "Refreshing package database...")
-  (package-refresh-contents)
-  (dolist (pkg my/packages)
-    (when (not (package-installed-p pkg))
-      (package-install pkg))))
-
-;; Find Executable Path on OS X
-(when (memq window-system '(mac ns))
-  (exec-path-from-shell-initialize))
-;; end
+;; nomasp 当在外部有修改时，让emacs自动重新加载
+(global-auto-revert-mode t)
 
 ;; nomasp 关闭工具栏
 (tool-bar-mode -1)
@@ -70,29 +26,14 @@
 ;; nomasp 加载主题monokai
 (load-theme 'monokai t)
 
-;; nomasp 加载hungry-delete，能够一次删除光标左侧所有空格
-(require 'hungry-delete)
-(global-hungry-delete-mode)
-
-;; nomasp 智能添加右括号
-(require 'smartparens-config)
-;;(add-hook 'emacs-lisp-mode-hook 'smartparens-mode)
-(smartparens-global-mode t)
 
 ;; nomasp 让mac系统下面的命令程序可见
 (when (memq window-system '(mac ns))
   (exec-path-from-shell-initialize))
 
-;; nomasp js2-mode
-(setq auto-mode-alist
-      (append
-       '(("\\.js\\'" . js2-mode))
-       auto-mode-alist))
 
-;; nomasp swiper将搜索结果多行列出
-(ivy-mode 1)
-(setq ivy-use-virtual-buffers t)
-(setq enable-recursive-minibuffers t)
+
+
 (global-set-key "\C-s" 'swiper)
 (global-set-key (kbd "C-c C-r") 'ivy-resume)
 (global-set-key (kbd "<f6>") 'ivy-resume)
@@ -134,8 +75,7 @@
 ;; nomasp 显示最近的文件
 (recentf-mode t)
 
-;; nomasp 开启全局 Company 补全
-(global-company-mode t)
+
 
 ;; nomasp 替换选择的全部
 (delete-selection-mode 1)
@@ -149,6 +89,9 @@
 ;; nomasp org模式下支持语法高亮
 (require 'org)
 (setq org-src-fontify-natively t)
+
+(setq ring-bell-function 'ignore)
+
 
 ;; nomasp 让emacs开启时为全屏
 ;; (setq initial-frame-alist (quote ((fullscreen . maximized))))
