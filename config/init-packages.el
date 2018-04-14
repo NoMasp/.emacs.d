@@ -1,15 +1,7 @@
-;; Added by Package.el.  This must come before configurations of
-;; installed packages.  Don't delete this line.  If you don't want it,
-;; just comment it out by adding a semicolon to the start of the line.
-;; You may delete these explanatory comments.
-;; nomasp delete
-;; (package-initialize)
-
 ;; nomasp start
 (when (>= emacs-major-version 24)
   (setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
 			   ("melpa" . "http://elpa.emacs-china.org/melpa-stable/"))))
-
 ;; 注意 elpa.emacs-china.org 是 Emacs China 中文社区在国内搭建的一个 ELPA 镜像
 
 ;; cl - Common Lisp Extension
@@ -42,8 +34,6 @@
 	when (not (package-installed-p pkg)) do (return nil)
 	finally (return t)))
 
-
-
 (unless (my/packages-installed-p)
   (message "%s" "Refreshing package database...")
   (package-refresh-contents)
@@ -60,13 +50,8 @@
 (require 'hungry-delete)
 (global-hungry-delete-mode)
 
-
-
 ;; nomasp 智能添加右括号
-(require 'smartparens-config)
-;;(add-hook 'emacs-lisp-mode-hook 'smartparens-mode)
 (smartparens-global-mode t)
-
 
 ;; nomasp js2-mode
 (setq auto-mode-alist
@@ -82,6 +67,7 @@
 ;; nomasp 开启全局 Company 补全
 (global-company-mode t)
 
+;; nomasp popwin-mode
 (require 'popwin)
 (popwin-mode t)
 
