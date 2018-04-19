@@ -23,4 +23,22 @@
 (when (memq window-system '(mac ns))
   (exec-path-from-shell-initialize))
 
+;; nomasp 替换yes-or
+(fset 'yes-or-no-p 'y-or-n-p)
+
+;; nomasp 设置拷贝和删除时都默认为递归
+(setq dired-recursive-copies 'always)
+(setq dired-recursive-deletes 'always)
+
+;; nomasp 共用dired buffer
+(put 'dired-find-alternate-file 'disabled nil)
+(require 'dired)
+(define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
+
+;; nomasp 开启dired
+(require 'dired-x)
+
+;; nomasp 开启dired-dwin-target
+(setq dired-dwim-target t)
+
 (provide 'init-better-default)

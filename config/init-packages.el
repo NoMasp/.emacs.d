@@ -25,6 +25,7 @@
 		      monokai-theme
 		      popwin ;; popwin
 		      ;; solarized-theme
+		      reveal-in-osx-finder
 		      ) "Default packages")
 
 (setq package-selected-packages my/packages)
