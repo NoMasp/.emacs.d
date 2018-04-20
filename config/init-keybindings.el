@@ -61,4 +61,10 @@
 					 try-complete-lisp-symbol))
 (global-set-key (kbd "s-/") 'hippie-expand)
 
+;; nomasp expand-region，使用它可以更方便的选中一个区域
+(global-set-key (kbd "C-=") 'er/expand-region)
+
+;; nomasp iedit是一个可以同时编辑多个区域的插件
+(global-set-key (kbd "M-s e") 'iedit-mode)
+
 (provide 'init-keybindings)

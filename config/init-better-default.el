@@ -13,6 +13,32 @@
 (setq recentf-max-menu-items 25)
 (global-set-key (kbd "\C-x\ \C-r") 'recentf-open-files)
 
+;; nomasp 增强occur模式，自动选取光标所在位置的单词
+;; dwim = do want i mean
+(defun occur-dwim ()
+  "Call `occur' with a sane default."
+  (interactive)
+  (push (if (region-active-p)
+	    (buffer-substring-no-properties
+	     (region-beginning)
+	     (region-end))
+	  (let ((sym (thing-at-point 'symbol)))
+	    (when (stringp sym)
+	      (regexp-quote sym))))
+	regexp-history)
+  (call-interactively 'occur))
+(global-set-key (kbd "M-s o") 'occur-dwim)
+(setq split-width-threshold 0)
+
+;; nomasp 显示当前文件里的函数列表
+
+;; nomasp 高亮显示光标两侧的括号
+(define-advice show-paren-function (:around (fn) fix-show-paren-function)
+  "Highlight enclosing parens."
+  (cond ((looking-at-p "\\s(") (funcal fn))
+	(t (save-excursion
+	     (ignore-errors (backward-up-list))
+	     (funcall fn)))))
 ;; nomasp 添加一个钩子，激活paren-mode
 (add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
 

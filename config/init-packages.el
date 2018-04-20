@@ -26,6 +26,8 @@
 		      popwin ;; popwin
 		      ;; solarized-theme
 		      reveal-in-osx-finder
+		      expand-region
+		      iedit
 		      ) "Default packages")
 
 (setq package-selected-packages my/packages)
@@ -53,6 +55,8 @@
 
 ;; nomasp 智能添加右括号
 (smartparens-global-mode t)
+;; nomasp emacs-lisp-mode下不要自动匹配单引号
+(sp-local-pair 'emacs-lisp-mode "'" nil :actions nil)
 
 ;; nomasp js2-mode
 (setq auto-mode-alist
