@@ -28,6 +28,10 @@
 		      reveal-in-osx-finder
 		      expand-region
 		      iedit
+		      ;; 动态类型检查
+		      flycheck
+		      ;; 自动补全
+		      auto-yasnippet
 		      ) "Default packages")
 
 (setq package-selected-packages my/packages)
@@ -75,5 +79,10 @@
 ;; nomasp popwin-mode
 (require 'popwin)
 (popwin-mode t)
+
+
+;; 激活flycheck mode
+(global-flycheck-mode)
+;; (add-hook 'js2-mode-hook 'flycheck-mode)
 
 (provide 'init-packages)
