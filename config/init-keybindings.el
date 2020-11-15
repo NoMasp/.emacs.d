@@ -67,8 +67,11 @@
 ;; nomasp iedit是一个可以同时编辑多个区域的插件
 (global-set-key (kbd "M-s e") 'iedit-mode)
 
-;; yasnippet的绑定
+;; nomasp yasnippet的绑定
 (global-set-key (kbd "H-w") #'aya-create)
 (global-set-key (kbd "H-y") #'aya-expand)
+
+;; nomasp 回退删除
+(global-set-key (kbd "C-w") 'backward-kill-word)
 
 (provide 'init-keybindings)
