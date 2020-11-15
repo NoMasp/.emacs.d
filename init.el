@@ -16,3 +16,6 @@
 ;; nomasp 加载custom file
 (setq custom-file (expand-file-name "config/custom.el" user-emacs-directory))
 (load-file custom-file)
+
+;;; nomasp load scheme
+(setq scheme-program-name "mit-scheme")
